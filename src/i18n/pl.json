@@ -1,0 +1,13 @@
+{
+    "menu": {
+      "business": "biznes",
+      "entertainment": "rozrywka",
+      "general": "ogólny",
+      "health": "zdrowie",
+      "science": "nauka",
+      "sports": "sporty",
+      "technology": "technologia",
+      "sources": "źródła"
+    }
+  }
+  

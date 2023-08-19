@@ -1,0 +1,12 @@
+{
+  "menu": {
+    "business": "бізнес",
+    "entertainment": "розваги",
+    "general": "загальний",
+    "health": "здоров'я",
+    "science": "наука",
+    "sports": "спорт",
+    "technology": "технології",
+    "sources": "джерела"
+  }
+}
