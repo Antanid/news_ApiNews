@@ -5,9 +5,14 @@ import menuImg from "../../assets/menu_icon.png";
 import uaFlag from "../../assets/flag-ua.png";
 import usFlag from "../../assets/flag-us.png";
 import plFlag from "../../assets/flag-pl.png";
+import burgerImg from '../../assets/burger_menu.png';
+import closeBurgerImg from '../../assets/close_burger.png'
+import { useLocation } from "react-router";
+
 
 const MenuPage = () => {
   const { i18n } = useTranslation();
+  const url = useLocation()
   useEffect(() => {
     switch (i18n.language) {
       case "ua":
@@ -22,9 +27,9 @@ const MenuPage = () => {
         setSelectedLanguage(plFlag);
         break;
 
-        default:
-          setSelectedLanguage(uaFlag);
-        break; 
+      default:
+        setSelectedLanguage(uaFlag);
+        break;
     }
   }, [i18n.language]);
   const [menuLi] = useState([
@@ -40,7 +45,7 @@ const MenuPage = () => {
       name: "menu.entertainment",
       path: "/entertainment",
     },
-   
+
     {
       name: "menu.health",
       path: "/health",
@@ -68,6 +73,8 @@ const MenuPage = () => {
     { icon: usFlag, language: "us" },
     { icon: plFlag, language: "pl" },
   ]);
+  const [openBurgerMenu, setOpenBurgerMenu] = useState(false);
+
 
   const onChangeLanguage = (str: string, str2: string) => {
     setSelectedLanguage(str);
@@ -77,10 +84,22 @@ const MenuPage = () => {
   const openChangeLanguage = () => {
     setLanguageOpen(!languageOpen);
   };
-  console.log(selectedLanguage);
+  const onOpenBurger = () => {
+    setOpenBurgerMenu(!openBurgerMenu)
+  }
+  const onCloseBurger = () => {
+    setOpenBurgerMenu(false)
+  }
+
   return (
     <div>
       <MenuLi
+        onCloseBurger={onCloseBurger}
+        openBurgerMenu={openBurgerMenu}
+        closeBurgerImg={closeBurgerImg}
+        onOpenBurger={onOpenBurger}
+        burgerImg={burgerImg}
+        urlLocation={url.pathname}
         openChangeLanguage={openChangeLanguage}
         languageOpen={languageOpen}
         languageLi={languageLi}

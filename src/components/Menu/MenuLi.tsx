@@ -17,6 +17,12 @@ type menuLiProps = {
   onChangeLanguage: (str: string, str2: string) => void;
   languageOpen: boolean;
   openChangeLanguage: () => void;
+  urlLocation: string;
+  burgerImg: string;
+  onOpenBurger: () => void;
+  closeBurgerImg: string;
+  openBurgerMenu: boolean;
+  onCloseBurger: () => any;
 };
 
 const MenuLi: React.FC<menuLiProps> = ({
@@ -27,30 +33,54 @@ const MenuLi: React.FC<menuLiProps> = ({
   onChangeLanguage,
   languageOpen,
   openChangeLanguage,
+  urlLocation,
+  burgerImg,
+  onOpenBurger,
+  closeBurgerImg,
+  openBurgerMenu,
+  onCloseBurger
 }) => {
   const { t } = useTranslation();
   return (
-    <header>
-      <ul className={style.header_menu}>
+
+    <header className={style.header_main}>
+      <ul className={openBurgerMenu ? style.header_menu_burger : style.header_menu}>
         <Link to={"/"}>
           <li>
             <img src={menuImg} alt="iconMenu" />
           </li>
         </Link>
         {menuLi.map((i) => (
-          <Link key={i.name} to={i.path}>
-            <li>{t(i.name)}</li>
+          <Link
+            onClick={onCloseBurger}
+            className={urlLocation === i.path ? style.selected_menu_li : ''}
+            key={i.name}
+            to={i.path}
+          >
+            <li className={style.menu_li_text}
+            >{t(i.name)}</li>
           </Link>
         ))}
+
       </ul>
       <div className={style.selected_lang}>
-        <img
-          src={selectedLanguage}
-          alt="selectedImg"
-          className={style.language_change}
-          onClick={openChangeLanguage}
-        />
+        <button>
+          <img
+            src={selectedLanguage}
+            alt="selectedImg"
+            className={style.language_change}
+            onClick={openChangeLanguage}
+          />
+        </button>
+        <button onClick={onOpenBurger} className={style.burger_button}>
+          <img
+            src={openBurgerMenu ? closeBurgerImg : burgerImg}
+            alt="burgerMenu"
+            className={style.burger_img}
+          />
+        </button>
       </div>
+
       {languageOpen && (
         <div className={style.select_language}>
           <ul>
@@ -67,6 +97,7 @@ const MenuLi: React.FC<menuLiProps> = ({
         </div>
       )}
     </header>
+
   );
 };
 

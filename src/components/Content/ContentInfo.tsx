@@ -21,15 +21,18 @@ type ContentType = {
 const ContentInfo: React.FC<ContentType> = ({ data, noImage, openUrl}) => {
   return (
     <div className={style.content_box}>
-      {data.map((i) => (
-        <div className={style.content_item} onClick={() => openUrl(i.url)}>
+      {data.map((i, index) => (
+        <div key={i.title} className={style.content_item} onClick={() => openUrl(i.url)}>
+          
           <img
             className={style.content_img}
             src={i.urlToImage ? i.urlToImage : noImage}
             alt="newsImg"
           />
+       
           <h4 className={style.content_text_data}>{i.publishedAt.split("T")[0]}</h4>
           <h3 className={style.content_text}>{i.title}</h3>
+          
         </div>
       ))}
     </div>

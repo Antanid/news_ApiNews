@@ -25,7 +25,6 @@ const Content: React.FC<ContentType> = ({ data }) => {
   const openUrl = (url: string) => {
     window.open(url);
   };
-  console.log(loading);
   return (
     <>
   {" "}
