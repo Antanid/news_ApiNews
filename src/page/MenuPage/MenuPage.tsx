@@ -1,6 +1,6 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import MenuLi from "../../components/Menu/MenuLi";
 import menuImg from "../../assets/menu_icon.png";
 import uaFlag from "../../assets/flag-ua.png";
 import usFlag from "../../assets/flag-us.png";
@@ -11,7 +11,15 @@ import { useLocation } from "react-router";
 import { useDispatch } from "react-redux";
 import { addBurgerStatus } from "../../redux/TopHeadlines/TopHeadlinesSlice";
 
-const MenuPage = () => {
+
+import MenuText from "../../components/Menu/MenuText";
+import ButtonLngBurger from "../../components/Menu/ButtonLngBurger";
+import BurgerMenu from "../../components/Menu/BurgerMenu";
+import LanguagePopUp from "../../components/Menu/LanguagePopUp";
+
+import style from "../../components/Menu/style/style.module.scss"
+
+const MenuPage: React.FC = () => {
   const { i18n } = useTranslation();
   const url = useLocation();
   const dispatch = useDispatch();
@@ -97,23 +105,37 @@ const MenuPage = () => {
   };
 
   return (
-    <div>
-      <MenuLi
-        onCloseBurger={onCloseBurger}
-        openBurgerMenu={openBurgerMenu}
-        closeBurgerImg={closeBurgerImg}
-        onOpenBurger={onOpenBurger}
-        burgerImg={burgerImg}
-        urlLocation={url.pathname}
-        openChangeLanguage={openChangeLanguage}
-        languageOpen={languageOpen}
-        languageLi={languageLi}
-        onChangeLanguage={onChangeLanguage}
-        selectedLanguage={selectedLanguage}
+    <header >
+      <MenuText
         menuImg={menuImg}
         menuLi={menuLi}
+        onCloseBurger={onCloseBurger}
+        urlLocation={url.pathname}
       />
-    </div>
+      <ButtonLngBurger
+        openBurgerMenu={openBurgerMenu}
+        selectedLanguage={selectedLanguage}
+        openChangeLanguage={openChangeLanguage}
+        onOpenBurger={onOpenBurger}
+        closeBurgerImg={closeBurgerImg}
+        burgerImg={burgerImg}
+      />
+
+      <BurgerMenu
+        openBurgerMenu={openBurgerMenu}
+        menuLi={menuLi}
+        onCloseBurger={onCloseBurger}
+        urlLocation={url.pathname}
+      />
+
+      <LanguagePopUp
+        languageOpen={languageOpen}
+        languageLi={languageLi}
+        selectedLanguage={selectedLanguage}
+        onChangeLanguage={onChangeLanguage}
+      />
+
+    </header>
   );
 };
 
