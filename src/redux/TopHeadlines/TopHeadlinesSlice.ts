@@ -6,12 +6,16 @@ import { fetchTopHeadlines } from "./asyncTopHeadlines";
 const initialState = {
     topNews: [],
     status: Status.LOADING,
+    burgerMenu: false,
 }
 
 const TopHeadlinesSlice = createSlice({
     name: 'TopHeadlinesSlice',
     initialState,
     reducers: {
+        addBurgerStatus (state, action){
+            state.burgerMenu = action.payload
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchTopHeadlines.pending, (state) => {
@@ -29,7 +33,10 @@ const TopHeadlinesSlice = createSlice({
     }
 })
 
+export const {addBurgerStatus} = TopHeadlinesSlice.actions;
+
 export const setTopHeadlines = (state: RootState) => state.TopHeadlinesSlice.topNews;
 export const setStatusLoading = (state: RootState) => state.TopHeadlinesSlice.status;
+export const setBurgerStatus = (state: RootState) => state.TopHeadlinesSlice.burgerMenu;
 
 export default TopHeadlinesSlice.reducer;

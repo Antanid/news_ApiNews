@@ -38,13 +38,12 @@ const MenuLi: React.FC<menuLiProps> = ({
   onOpenBurger,
   closeBurgerImg,
   openBurgerMenu,
-  onCloseBurger
+  onCloseBurger,
 }) => {
   const { t } = useTranslation();
   return (
-
     <header className={style.header_main}>
-      <ul className={openBurgerMenu ? style.header_menu_burger : style.header_menu}>
+      <ul className={style.header_menu}>
         <Link to={"/"}>
           <li>
             <img src={menuImg} alt="iconMenu" />
@@ -53,25 +52,26 @@ const MenuLi: React.FC<menuLiProps> = ({
         {menuLi.map((i) => (
           <Link
             onClick={onCloseBurger}
-            className={urlLocation === i.path ? style.selected_menu_li : ''}
+            className={urlLocation === i.path ? style.selected_menu_li : ""}
             key={i.name}
             to={i.path}
           >
-            <li className={style.menu_li_text}
-            >{t(i.name)}</li>
+            <li className={style.menu_li_text}>{t(i.name)}</li>
           </Link>
         ))}
-
       </ul>
       <div className={style.selected_lang}>
-        <button>
-          <img
-            src={selectedLanguage}
-            alt="selectedImg"
-            className={style.language_change}
-            onClick={openChangeLanguage}
-          />
-        </button>
+        {openBurgerMenu === false && (
+          <button>
+            <img
+              src={selectedLanguage}
+              alt="selectedImg"
+              className={style.language_change}
+              onClick={openChangeLanguage}
+            />
+          </button>
+        )}
+
         <button onClick={onOpenBurger} className={style.burger_button}>
           <img
             src={openBurgerMenu ? closeBurgerImg : burgerImg}
@@ -80,6 +80,22 @@ const MenuLi: React.FC<menuLiProps> = ({
           />
         </button>
       </div>
+      
+        <div className={style.burger_menu}>
+          <ul className={openBurgerMenu ? style.burger_ul : style.burger_close}>
+            {menuLi.map((i) => (
+              <Link
+                onClick={onCloseBurger}
+                className={urlLocation === i.path ? style.selected_menu_li : ""}
+                key={i.name}
+                to={i.path}
+              >
+                <li className={style.menu_li_text}>{t(i.name)}</li>
+              </Link>
+            ))}
+          </ul>
+        </div>
+    
 
       {languageOpen && (
         <div className={style.select_language}>
@@ -97,7 +113,6 @@ const MenuLi: React.FC<menuLiProps> = ({
         </div>
       )}
     </header>
-
   );
 };
 
